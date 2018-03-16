@@ -1,0 +1,17 @@
+
+cd caffe/python/
+for req in $(cat requirements.txt); do pip install $req; done
+
+make all
+make test
+make runtest
+
+sh get_mnist.sh 
+
+sh examples/mnist/create_mnist.sh
+
+./build/tools/caffe train --solver=examples/mnist/lenet_solver.prototxt
+
+test
+./build/tools/caffe.bin  test -model examples/mnist/lenet_train_test.prototxt -weights examples/mnist/lenet_iter_10000.caffemodel -iterations 100
+
