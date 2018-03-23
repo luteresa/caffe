@@ -14,7 +14,15 @@
 //#define CPU_ONLY
 #define INTER_FAST
 using namespace caffe;
+std::string get_file_name(std::string path)
+{
+	std::string::size_type left= path.rfind("/");
+	std::string::size_type right= path.rfind(".");
+	std::string file= path.substr(left+1,right-left-1);
+	std::cout<<left<<","<<right<<std::endl;
 
+	return file;
+}
 typedef struct FaceRect {
   float x1;
   float y1;
@@ -587,13 +595,15 @@ int main(int argc,char **argv)
     return 0;
   }
   ::google::InitGoogleLogging(argv[0]);
-  double threshold[3] = {0.6,0.7,0.7};
+  //double threshold[3] = {0.6,0.7,0.7};
+  double threshold[3] = {0.7,0.8,0.8};
   double factor = 0.709;
   int minSize = 40;
   std::string proto_model_dir = argv[1];
   MTCNN detector(proto_model_dir);
 
   std::string imageName = argv[2];
+  std::string file_name=get_file_name(imageName);
   cv::Mat image = cv::imread(imageName);
   std::vector<FaceInfo> faceInfo;
   clock_t t1 = clock();
@@ -616,7 +626,7 @@ int main(int argc,char **argv)
     for(int j=0;j<5;j++)
       cv::circle(image,cv::Point(facePts.y[j],facePts.x[j]),1,cv::Scalar(255,255,255),2);
   }
-  cv::imshow("image",image);
+  cv::imshow(file_name,image);
   cv::waitKey(0);
 
   return 1;
