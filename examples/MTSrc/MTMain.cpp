@@ -609,14 +609,14 @@ int main(int argc,char **argv)
     float y = faceInfo[i].bbox.y1;
     float h = faceInfo[i].bbox.x2 - faceInfo[i].bbox.x1 +1;
     float w = faceInfo[i].bbox.y2 - faceInfo[i].bbox.y1 +1;
-    cv::rectangle(image,cv::Rect(y,x,w,h),cv::Scalar(255,0,0),2);
+    cv::rectangle(image,cv::Rect(y,x,w,h),cv::Scalar(0,0,255),2);
   }
   for(int i=0;i<faceInfo.size();i++){
     FacePts facePts = faceInfo[i].facePts;
     for(int j=0;j<5;j++)
-      cv::circle(image,cv::Point(facePts.y[j],facePts.x[j]),1,cv::Scalar(255,255,0),2);
+      cv::circle(image,cv::Point(facePts.y[j],facePts.x[j]),1,cv::Scalar(255,255,255),2);
   }
-  cv::imshow("a",image);
+  cv::imshow("image",image);
   cv::waitKey(0);
 
   return 1;
