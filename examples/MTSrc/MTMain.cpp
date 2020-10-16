@@ -8,6 +8,14 @@
 #include <fstream>
 // opencv
 #include <opencv2/opencv.hpp>
+#include <iostream>
+#include <opencv2/opencv.hpp>
+#include <opencv2/core/core.hpp>
+#include <opencv2/core/types_c.h>
+
+using namespace cv;
+
+
 // boost
 #include "boost/make_shared.hpp"
 
